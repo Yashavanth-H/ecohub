@@ -24,3 +24,47 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/*  carousel slider dynamic*/
+
+/* src/app/globals.css */
+
+/* -- Revised Stacking Carousel Styles -- */
+.embla-stack {
+  position: relative;
+  max-width: 48rem; /* Set a max-width for the container */
+  margin: auto;
+}
+
+.embla-stack__viewport {
+  overflow: hidden;
+}
+
+.embla-stack__container {
+  display: flex;
+  /* Adjust height as needed */
+  height: 480px; 
+}
+
+.embla-stack__slide {
+  flex: 0 0 100%; /* Each slide now takes the full container width */
+  position: relative;
+  opacity: 0.2;
+  transform: scale(0.7);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  padding: 0 1rem;
+}
+
+/* Base states for slides not immediately visible */
+.embla-stack__slide--prev,
+.embla-stack__slide--next {
+  opacity: 0.4;
+  transform: scale(0.85);
+}
+
+/* State for the currently active/centered slide */
+.embla-stack__slide--selected {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 10;
+}
