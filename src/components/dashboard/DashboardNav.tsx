@@ -10,7 +10,7 @@ const DashboardNav = () => {
       <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
         {/* Left Side: Logo & Main Links */}
         <div className="flex items-center space-x-8">
-          <Link href="/home" className="text-2xl font-bold text-green-600">
+          <Link href="/" className="text-2xl font-bold text-green-600">
             EcoHub
           </Link>
           <div className="hidden md:flex items-center space-x-6">

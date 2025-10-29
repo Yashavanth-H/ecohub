@@ -11,11 +11,12 @@ import '@splidejs/react-splide/css';
 
 const featuredProducts: ProductCardProps[] = [
   { id: '1', name: 'Upcycled Wooden Chair', category: 'Furniture', price: 85.00, imageUrl: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1965&auto.format&fit=crop' },
-  { id: '2', name: 'Recycled Glass Vases', category: 'Home Decor', price: 35.50, imageUrl: 'https://images.unsplash.com/photo-1586799054333-e6315b494f6f?q=80&w=1964&auto.format&fit=crop' },
+  { id: '2', name: 'Recycled Glass Vases', category: 'Home Decor', price: 35.50, imageUrl: 'https://unsplash.com/photos/a-bottle-of-wine-sitting-on-top-of-a-table-PBD1TD-Yf60' },
   { id: '3', name: 'Refurbished Classic Bicycle', category: 'Transport', price: 199.99, imageUrl: 'https://images.unsplash.com/photo-1559348331-46b0a1a0d389?q=80&w=2070&auto.format&fit=crop' },
   { id: '5', name: 'Second-hand Laptop', category: 'Electronics', price: 450.00, imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto.format&fit=crop' },
   { id: '6', name: 'Reclaimed Wood Coffee Table', category: 'Furniture', price: 220.00, imageUrl: 'https://images.unsplash.com/photo-1549488344-cbb6c144a475?q=80&w=1974&auto.format&fit=crop' },
   { id: '7', name: 'Vintage Leather Jacket', category: 'Accessories', price: 120.00, imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1887&auto.format&fit=crop' },
+  { id: '8', name: 'Second-hand Laptop', category: 'Electronics', price: 450.00, imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto.format&fit=crop' },
 ];
 
 const FeaturedCarousel = () => {

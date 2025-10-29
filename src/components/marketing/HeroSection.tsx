@@ -1,5 +1,6 @@
 // src/components/marketing/HeroSection.tsx
 import Link from 'next/link';
+import Image from 'next/image';
 
 const HeroSection = () => {
   return (
@@ -21,9 +22,15 @@ const HeroSection = () => {
           </Link>
         </div>
 
-        {/* Image Placeholder */}
-        <div className="hidden md:flex justify-center items-center bg-gray-100 rounded-2xl h-96">
-            <span className="text-gray-500">Sustainable Marketplace</span>
+        {/* Hero Image */}
+        <div className="hidden md:flex justify-center items-center rounded-2xl h-96 overflow-hidden">
+          <Image 
+            src="/assets/hero.png" 
+            alt="Sustainable Marketplace" 
+            width={600} 
+            height={400} 
+            className="object-cover rounded-2xl"
+          />
         </div>
       </div>
     </section>

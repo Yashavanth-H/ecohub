@@ -15,25 +15,25 @@ type FilterBarProps = {
 const FilterBar = ({ onSearchChange, onCategoryChange, onConditionChange, productCount }: FilterBarProps) => {
   return (
     <div className="w-full md:w-1/4 lg:w-1/5 p-6 bg-white rounded-lg shadow">
-      <h3 className="text-xl font-bold mb-4">Filters</h3>
+      <h3 className="text-xl font-bold mb-4 text-black">Filters</h3>
       <div className="space-y-6">
         {/* Search Input */}
         <div>
-          <label htmlFor="search" className="block text-sm font-medium text-gray-700">Search</label>
+          <label htmlFor="search" className="block text-sm font-medium text-gray-900">Search</label>
           <input
             type="text"
             id="search"
             placeholder="e.g., wooden chair"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 text-black"
             onChange={(e) => onSearchChange(e.target.value)}
           />
         </div>
         {/* Category Select */}
         <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
+          <label htmlFor="category" className="block text-sm font-medium text-black">Category</label>
           <select
             id="category"
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-md text-black"
             onChange={(e) => onCategoryChange(e.target.value)}
           >
             {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
@@ -41,10 +41,10 @@ const FilterBar = ({ onSearchChange, onCategoryChange, onConditionChange, produc
         </div>
         {/* Condition Select */}
         <div>
-          <label htmlFor="condition" className="block text-sm font-medium text-gray-700">Condition</label>
+          <label htmlFor="condition" className="block text-sm font-medium text-gray-900">Condition</label>
           <select
             id="condition"
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-md text-black"
             onChange={(e) => onConditionChange(e.target.value)}
           >
             {conditions.map(con => <option key={con} value={con}>{con}</option>)}
@@ -52,7 +52,7 @@ const FilterBar = ({ onSearchChange, onCategoryChange, onConditionChange, produc
         </div>
       </div>
       <div className="mt-8 pt-4 border-t border-gray-200">
-        <p className="text-sm text-gray-600">{productCount} products found</p>
+        <p className="text-sm text-gray-900">{productCount} products found</p>
       </div>
     </div>
   );
