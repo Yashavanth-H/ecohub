@@ -13,13 +13,14 @@ const initialFavorites: ProductCardProps[] = [
 ];
 
 const FavoritesClientPage = () => {
-  const [favorites, setFavorites] = useState<ProductCardProps[]>(initialFavorites);
+  // const [favorites, setFavorites] = useState<ProductCardProps[]>(initialFavorites);
+  const [favorites] = useState<ProductCardProps[]>(initialFavorites);
 
   // In a real app, a "Remove" button on each card would call this function
-  const handleRemoveFavorite = (id: string) => {
-    setFavorites(favorites.filter(item => item.id !== id));
-    console.log(`Removed favorite ${id}`);
-  };
+  // const handleRemoveFavorite = (id: string) => {
+  //   setFavorites(favorites.filter(item => item.id !== id));
+  //   console.log(`Removed favorite ${id}`);
+  // };
 
   if (favorites.length === 0) {
     return (

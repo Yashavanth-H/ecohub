@@ -16,7 +16,7 @@ const AiFeatures = () => {
               <FileText className="w-12 h-12 text-green-500" strokeWidth={1.5} />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Smart Product Categorization</h3>
-            <p className="text-gray-600">Our AI model automatically suggests the best category for your listing, ensuring it's seen by the right people.</p>
+            <p className="text-gray-600">Our AI model automatically suggests the best category for your listing, ensuring it&apos;s seen by the right people.</p>
           </div>
 
           {/* Feature Card 2 */}
@@ -25,7 +25,7 @@ const AiFeatures = () => {
             <div className="flex justify-center mb-5">
               <MessageSquare className="w-12 h-12 text-green-500" strokeWidth={1.5} />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Seamless In-App Messaging</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Seamless</h3>
             <p className="text-gray-600">Communicate securely and directly with potential buyers or sellers right from your dashboard.</p>
           </div>
 

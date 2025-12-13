@@ -10,7 +10,7 @@ export default function LandingPage() {
     <div>
       <HeroSection />
       <HowItWorks />
-      <FeaturedCarousel /> {/* <-- 2. Add the new section here */}
+      <FeaturedCarousel /> 
       <AiFeatures />
       <CallToAction />
     </div>

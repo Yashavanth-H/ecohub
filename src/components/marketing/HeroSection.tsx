@@ -15,7 +15,7 @@ const HeroSection = () => {
             Connect with businesses and consumers to buy, sell, and trade reusable products. Harness the power of AI to build a sustainable future.
           </p>
           <Link 
-            href="/signup"
+            href="/buy"
             className="bg-green-600 text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-green-700 transition duration-300 inline-block"
           >
             Start Your Eco Journey

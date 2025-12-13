@@ -45,7 +45,7 @@ const CartClientPage = () => {
     return (
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">Your Cart is Empty</h2>
-        <p className="text-gray-600 mb-6">Looks like you haven't added anything to your cart yet.</p>
+        Looks like you haven&apos;t added anything to your cart yet.
         <Link href="/buy" className="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700">
           Continue Shopping
         </Link>

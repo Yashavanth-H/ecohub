@@ -1,22 +1,27 @@
 // src/components/marketing/FeaturedCarousel.tsx
 'use client';
 
+// @ts-expect-error: Splide types are not properly exported
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import ProductCard, { ProductCardProps } from '@/components/products/ProductCard';
-import Link from 'next/link'; // <-- 1. Make sure Link is imported
+import Link from 'next/link'; 
 
 // Import the Splide CSS
 import '@splidejs/react-splide/css';
 
+// ✅ Import your local images
+import fridge from '@/app/assets/fridge.jpeg';
+import gyser from '@/app/assets/gyser.jpeg';
+import soundBar from '@/app/assets/soundBar.jpeg';
+import washingmachine from '@/app/assets/washingmachine.jpeg';
+
+// ✅ Use local images below — no other changes
 const featuredProducts: ProductCardProps[] = [
-  { id: '1', name: 'Upcycled Wooden Chair', category: 'Furniture', price: 85.00, imageUrl: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1965&auto.format&fit=crop' },
-  { id: '2', name: 'Recycled Glass Vases', category: 'Home Decor', price: 35.50, imageUrl: 'https://unsplash.com/photos/a-bottle-of-wine-sitting-on-top-of-a-table-PBD1TD-Yf60' },
-  { id: '3', name: 'Refurbished Classic Bicycle', category: 'Transport', price: 199.99, imageUrl: 'https://images.unsplash.com/photo-1559348331-46b0a1a0d389?q=80&w=2070&auto.format&fit=crop' },
-  { id: '5', name: 'Second-hand Laptop', category: 'Electronics', price: 450.00, imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto.format&fit=crop' },
-  { id: '6', name: 'Reclaimed Wood Coffee Table', category: 'Furniture', price: 220.00, imageUrl: 'https://images.unsplash.com/photo-1549488344-cbb6c144a475?q=80&w=1974&auto.format&fit=crop' },
-  { id: '7', name: 'Vintage Leather Jacket', category: 'Accessories', price: 120.00, imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1887&auto.format&fit=crop' },
-  { id: '8', name: 'Second-hand Laptop', category: 'Electronics', price: 450.00, imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto.format&fit=crop' },
+  { id: '1', name: 'Smart Refrigerator', category: 'Appliances', price: 850.00, imageUrl: fridge.src },
+  { id: '2', name: 'Instant Geyser', category: 'Home Appliances', price: 120.00, imageUrl: gyser.src },
+  { id: '3', name: 'Dolby Sound Bar', category: 'Electronics', price: 299.99, imageUrl: soundBar.src },
+  { id: '4', name: 'Washing Machine', category: 'Appliances', price: 450.00, imageUrl: washingmachine.src },
 ];
 
 const FeaturedCarousel = () => {
@@ -31,12 +36,8 @@ const FeaturedCarousel = () => {
       pauseOnHover: true,
     },
     breakpoints: {
-      1024: {
-        perPage: 2,
-      },
-      768: {
-        perPage: 1,
-      },
+      1024: { perPage: 2 },
+      768: { perPage: 1 },
     },
   };
 
@@ -53,7 +54,7 @@ const FeaturedCarousel = () => {
             </SplideSlide>
           ))}
         </Splide>
-        
+
         {/* --- NEW BUTTON SECTION --- */}
         <div className="text-center mt-12">
           <Link
@@ -63,7 +64,6 @@ const FeaturedCarousel = () => {
             Explore All Products
           </Link>
         </div>
-        
       </div>
     </section>
   );

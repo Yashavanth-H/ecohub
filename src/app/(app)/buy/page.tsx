@@ -1,60 +1,123 @@
-// src/app/(app)/buy/page.tsx
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import ProductCard from '@/components/marketplace/ProductCard';
 import FilterBar from '@/components/marketplace/FilterBar';
-import ProductGrid from '@/components/marketplace/ProductGrid';
-import { ProductCardProps } from '@/components/products/ProductCard';
+import { Frown } from 'lucide-react';
 
-// This is our mock database of all products
-const allProducts: ProductCardProps[] = [
-  { id: '1', name: 'Upcycled Wooden Chair', category: 'Furniture', price: 85.00, imageUrl: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1965&auto=format&fit=crop' },
-  { id: '2', name: 'Recycled Glass Vases', category: 'Home Decor', price: 35.50, imageUrl: '/assets/vessese.avif' },
-  { id: '3', name: 'Refurbished Classic Bicycle', category: 'Transport', price: 199.99, imageUrl: '/assets/bicycle.avif' },
-  { id: '4', name: 'Organic Cotton Tote Bag', category: 'Accessories', price: 15.00, imageUrl: '/assets/bag.avif' },
-  { id: '5', name: 'Second-hand Laptop', category: 'Electronics', price: 450.00, imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto=format&fit=crop' },
-  { id: '6', name: 'Reclaimed Wood Coffee Table', category: 'Furniture', price: 220.00, imageUrl: '/assets/cfe-table.avif' },
-  { id: '7', name: 'Vintage Leather Jacket', category: 'Accessories', price: 120.00, imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1887&auto=format&fit=crop' },
-  { id: '8', name: 'Used Android Smartphone', category: 'Electronics', price: 150.00, imageUrl: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1965&auto=format&fit=crop' },
-];
+interface Product {
+  product_id: string;
+  title: string;
+  price: string;
+  condition: string;
+  image_url: string;
+  category_name: string;
+  seller_username: string;
+}
 
+export type Filters = {
+  search: string;
+  category: string | undefined;
+  condition: string | undefined;
+};
 
-export default function MarketplacePage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedCondition, setSelectedCondition] = useState('All'); // We can add this to the data later
+const BuyPage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // useMemo will re-calculate the filtered products only when a filter changes
-  const filteredProducts = useMemo(() => {
-    let products = allProducts;
+  const [filters, setFilters] = useState<Filters>({
+    search: '',
+    category: undefined,
+    condition: undefined,
+  });
 
-    if (searchQuery) {
-      products = products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  const fetchProducts = useCallback(async (currentFilters: Filters) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const params = new URLSearchParams();
+      if (currentFilters.search) params.append('search', currentFilters.search);
+      if (currentFilters.category) params.append('category', String(currentFilters.category));
+      if (currentFilters.condition) params.append('condition', currentFilters.condition);
+
+      const queryString = params.toString();
+      const url = `http://localhost:5001/api/products${queryString ? `?${queryString}` : ''}`;
+
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to fetch marketplace products.');
+
+      const data = await response.json();
+      setProducts(Array.isArray(data.products) ? data.products : []);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError('Could not connect to the marketplace. Please check the backend server.');
+      setProducts([]);
+    } finally {
+      setLoading(false);
     }
+  }, []);
 
-    if (selectedCategory !== 'All') {
-      products = products.filter(p => p.category === selectedCategory);
-    }
-    
-    // Condition filter would go here if we add 'condition' to the product data
+  // refetch when filters change
+  useEffect(() => {
+    fetchProducts(filters);
+  }, [fetchProducts, filters]);
 
-    return products;
-  }, [searchQuery, selectedCategory]);
+  // only update when filters actually change
+  const handleFilterChange = useCallback((newFilters: Filters) => {
+    setFilters((prev) => {
+      if (
+        prev.search === newFilters.search &&
+        prev.category === newFilters.category &&
+        prev.condition === newFilters.condition
+      ) {
+        return prev;
+      }
+      return newFilters;
+    });
+  }, []);
+
+  if (loading) {
+    return <div className="text-center p-10 text-lg font-medium">Loading the circular marketplace...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center p-10 text-red-600 font-semibold">{error}</div>;
+  }
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-black">Marketplace</h1>
-      <div className="flex flex-col md:flex-row gap-8">
-        <FilterBar 
-          onSearchChange={setSearchQuery}
-          onCategoryChange={setSelectedCategory}
-          onConditionChange={setSelectedCondition}
-          productCount={filteredProducts.length}
-        />
-        <div className="w-full">
-          <ProductGrid products={filteredProducts} />
+    <div className="mx-auto p-6 pt-10">
+      <h2 className="text-3xl font-bold mb-4">Marketplace</h2>
+
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Sidebar Filters */}
+        <div className="w-full lg:w-72 flex-shrink-0">
+          <FilterBar onFilterChange={handleFilterChange} productsCount={products.length} />
+        </div>
+
+        {/* Product Grid */}
+        <div className="flex-1">
+          {products.length === 0 ? (
+            <div className="text-center p-10 text-gray-500 mt-10">
+              <Frown className="w-12 h-12 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold">No items match your search criteria.</h3>
+              <p className="mt-2">Try resetting the filters or checking back later.</p>
+            </div>
+          ) : (
+            <>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {products.map((product) => (
+                  <ProductCard key={product.product_id} product={product} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default BuyPage;
